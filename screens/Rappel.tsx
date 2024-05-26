@@ -1,7 +1,7 @@
 import { addDoc, collection, deleteDoc, doc, onSnapshot, orderBy, query, where } from 'firebase/firestore';
 import React, { useEffect, useState } from 'react';
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+// import "react-datepicker/dist/react-datepicker.css";
 import { Alert, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native';
 import Colors from '../constants/Colors';
 import { auth, db } from '../firebase/firebase'; // Ensure the paths are correct

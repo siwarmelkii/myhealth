@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { ScrollView, StyleSheet } from 'react-native';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import Navigation from './navigation/Navigation';
@@ -40,8 +40,11 @@ export default function App() {
     //   <StatusBar style="auto" />
     // </View>
     <Provider store={store}>
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
 
     <Navigation/>
+          </ScrollView>
+
     </Provider>
   );
 }
@@ -52,5 +55,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  scrollViewContent: {
+    flexGrow: 1,
   },
 });

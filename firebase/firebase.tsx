@@ -1,8 +1,9 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useNavigation } from '@react-navigation/native';
 import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
-
+ 
 // Config Firebase
 const firebaseConfig = {
   apiKey: "AIzaSyBqUmYO3KznEJaSzfHkwh3ULX-LNoR8f1c",
@@ -25,12 +26,11 @@ const storeUserData = async (user) => {
 };
 
 // Function to load user data
-const loadUserData = async () => {
+export const loadUserData = async () => {
   const userJson = await AsyncStorage.getItem('user');
   return userJson ? JSON.parse(userJson) : null;
 };
-
-// Auth State Change Listener
+ // Auth State Change Listener
 onAuthStateChanged(auth, async (user) => {
   if (user) {
     // User is signed in
@@ -40,7 +40,7 @@ onAuthStateChanged(auth, async (user) => {
     // User is signed out
     console.log('User signed out');
     await AsyncStorage.removeItem('user');
-  }
+   }
 });
 
 export { auth, db };

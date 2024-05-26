@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import {ScrollView} from "react-native"
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer } from "@react-navigation/native";
 
@@ -9,27 +9,30 @@ import {  signOut } from "firebase/auth";
 
 import { User, onAuthStateChanged } from "firebase/auth";
 import { auth } from "../firebase/firebase";
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
+ 
 const Stack = createNativeStackNavigator();
 
 export default function Navigation() {
   const [user, setUser] = useState<User | null>(null);
-
+ 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
-      console.log("user", user);
+      // console.log("user", user);
       if(user?.emailVerified){
         setUser(user);
-     
-       }
+       }else {
+        setUser(null)
+       }  
     });
   }, []);
+  
 
   
-  
-  return (
+   return (
     //   {user ? <AuthStack /> : <InitialScreenOnStart />}
     <NavigationContainer>
+ 
       <Stack.Navigator initialRouteName="InitialScreenOnStart">
         {user ? (
           <Stack.Screen
@@ -45,6 +48,7 @@ export default function Navigation() {
           />
         )}
       </Stack.Navigator>
+ 
     </NavigationContainer>
   );
 }
